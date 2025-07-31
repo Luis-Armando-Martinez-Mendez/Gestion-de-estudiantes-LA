@@ -1,6 +1,10 @@
+using Gestion.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
+builder.Services.AddDbContext<GestionContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GestionStrConnection") ?? throw new InvalidOperationException("Connection string 'Gestion estudiantes' not found.")));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
